@@ -13,7 +13,17 @@ chart.append("text")
   .attr("id", "title")
   .text("United States GDP");
 
+chart.append("g")
+  .attr("id", "x-axis")
+
+
 d3.json("./data/GDP-data.json")
-  .then(function(data) {
-    console.log(data);
+  .then(function(json) {
+    console.log(json);
+
+    const xScale = d3.scaleTime()
+                     .domain([d3.min(json.data, d => new Date(d[0])),
+                              d3.max(json.data, d => new Date(d[0]))])
+                     .range([0, w]);
+    const yScale = d3.scaleLinear().domain([0, d3.max(json.data, d => d[1])]).range([h, 0]);
   });

@@ -18380,8 +18380,17 @@ var w = 500;
 var h = 200;
 var chart = d3.select("#chart").attr("width", w).attr("height", h);
 chart.append("text").attr("y", 150).attr("x", 200).attr("id", "title").text("United States GDP");
-d3.json("./data/GDP-data.json").then(function (data) {
-  console.log(data);
+chart.append("g").attr("id", "x-axis");
+d3.json("./data/GDP-data.json").then(function (json) {
+  console.log(json);
+  var xScale = d3.scaleTime().domain([d3.min(json.data, function (d) {
+    return new Date(d[0]);
+  }), d3.max(json.data, function (d) {
+    return new Date(d[0]);
+  })]).range([0, w]);
+  var yScale = d3.scaleLinear().domain([0, d3.max(json.data, function (d) {
+    return d[1];
+  })]).range([h, 0]);
 });
 
 },{"d3":32}]},{},[33]);
