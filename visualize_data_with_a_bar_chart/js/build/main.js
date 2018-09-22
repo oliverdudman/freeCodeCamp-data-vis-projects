@@ -18378,19 +18378,23 @@ var d3 = require("d3");
 
 var w = 500;
 var h = 200;
+var padding = 50;
 var chart = d3.select("#chart").attr("width", w).attr("height", h);
 chart.append("text").attr("y", 150).attr("x", 200).attr("id", "title").text("United States GDP");
-chart.append("g").attr("id", "x-axis");
 d3.json("./data/GDP-data.json").then(function (json) {
   console.log(json);
   var xScale = d3.scaleTime().domain([d3.min(json.data, function (d) {
     return new Date(d[0]);
   }), d3.max(json.data, function (d) {
     return new Date(d[0]);
-  })]).range([0, w]);
+  })]).range([0 + padding, w - padding]);
   var yScale = d3.scaleLinear().domain([0, d3.max(json.data, function (d) {
     return d[1];
-  })]).range([h, 0]);
+  })]).range([h - padding, 0 + padding]);
+  var xAxis = d3.axisBottom(xScale);
+  var yAxis = d3.axisLeft(yScale);
+  chart.append("g").attr("id", "x-axis").attr("transform", "translate(0, " + (h - padding) + ")").call(xAxis);
+  chart.append("g").attr("id", "y-axis").attr("transform", "translate(" + padding + ", 0)").call(yAxis);
 });
 
 },{"d3":32}]},{},[33]);
