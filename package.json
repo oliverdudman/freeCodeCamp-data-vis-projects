@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
     "babelify": "^10.0.0",
     "browser-sync": "^2.24.7",
     "browserify": "^16.2.2",
@@ -32,6 +33,7 @@
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^2.6.4",
     "rename": "^1.0.4",
-    "vinyl-source-stream": "^2.0.0"
+    "vinyl-source-stream": "^2.0.0",
+    "yargs": "^12.0.2"
   }
 }
