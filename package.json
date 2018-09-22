@@ -35,5 +35,21 @@
     "rename": "^1.0.4",
     "vinyl-source-stream": "^2.0.0",
     "yargs": "^12.0.2"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "env": {
+      "browser": true,
+      "amd": true
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "rules": {
+      "semi": 2
+    }
   }
 }
