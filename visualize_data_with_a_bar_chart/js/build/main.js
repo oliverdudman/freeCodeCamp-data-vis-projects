@@ -18376,8 +18376,8 @@ Object.defineProperty(exports, "event", {get: function() { return d3Selection.ev
 
 var d3 = require("d3");
 
-var w = 500;
-var h = 200;
+var w = 700;
+var h = 500;
 var padding = 50;
 var chart = d3.select("#chart").attr("width", w).attr("height", h);
 chart.append("text").attr("y", 150).attr("x", 200).attr("id", "title").text("United States GDP");
@@ -18395,6 +18395,13 @@ d3.json("./data/GDP-data.json").then(function (json) {
   var yAxis = d3.axisLeft(yScale);
   chart.append("g").attr("id", "x-axis").attr("transform", "translate(0, " + (h - padding) + ")").call(xAxis);
   chart.append("g").attr("id", "y-axis").attr("transform", "translate(" + padding + ", 0)").call(yAxis);
+  chart.selectAll("rect").data(json.data).enter().append("rect").attr("class", "bar").attr("y", function (d) {
+    return yScale(d[1]);
+  }).attr("x", function (d) {
+    return xScale(new Date(d[0]));
+  }).attr("height", function (d) {
+    return h - padding - yScale(d[1]);
+  }).attr("width", 2).style("fill", "blue");
 });
 
 },{"d3":32}]},{},[33]);

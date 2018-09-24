@@ -1,7 +1,7 @@
 const d3 = require("d3");
 
-const w = 500;
-const h = 200;
+const w = 700;
+const h = 500;
 const padding = 50;
 
 var chart = d3.select("#chart")
@@ -22,7 +22,9 @@ d3.json("./data/GDP-data.json")
                      .domain([d3.min(json.data, d => new Date(d[0])),
                               d3.max(json.data, d => new Date(d[0]))])
                      .range([0 + padding, w - padding]);
-    const yScale = d3.scaleLinear().domain([0, d3.max(json.data, d => d[1])]).range([h - padding, 0 + padding]);
+    const yScale = d3.scaleLinear()
+                     .domain([0, d3.max(json.data, d => d[1])])
+                     .range([h - padding, 0 + padding]);
 
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);
@@ -36,4 +38,15 @@ d3.json("./data/GDP-data.json")
          .attr("id", "y-axis")
          .attr("transform", "translate(" + padding + ", 0)")
          .call(yAxis);
+
+    chart.selectAll("rect")
+         .data(json.data)
+         .enter()
+         .append("rect")
+         .attr("class", "bar")
+         .attr("y", d => yScale(d[1]))
+         .attr("x", d => xScale(new Date(d[0])))
+         .attr("height", d => h - padding - yScale(d[1]))
+         .attr("width", 2)
+         .style("fill", "blue");
   });
