@@ -18381,6 +18381,7 @@ var h = 500;
 var padding = 50;
 var chart = d3.select("#chart").attr("width", w).attr("height", h);
 chart.append("text").attr("y", 150).attr("x", 200).attr("id", "title").text("United States GDP");
+chart.append("text").attr("id", "tooltip").style("opacity", "0");
 d3.json("./data/GDP-data.json").then(function (json) {
   console.log(json);
   var xScale = d3.scaleTime().domain([d3.min(json.data, function (d) {
@@ -18405,7 +18406,14 @@ d3.json("./data/GDP-data.json").then(function (json) {
     return d[0];
   }).attr("data-gdp", function (d) {
     return d[1];
-  }).attr("width", 2).style("fill", "blue");
+  }).attr("width", 2).style("fill", "blue").on("mouseover", function (d) {
+    var positionX = xScale(new Date(d[0]));
+    var tooltip = chart.select("#tooltip").attr("x", positionX).attr("y", yScale(d[1]) / 2).attr("data-date", d[0]).style("transition", "1s").style("opacity", "1");
+    tooltip.append("tspan").attr("x", positionX).text("GDP: ".concat(d[1]));
+    tooltip.append("tspan").attr("dy", "1em").attr("x", positionX).text("Date: ".concat(d[0]));
+  }).on("mouseleave", function () {
+    chart.select("#tooltip").style("opacity", "0").selectAll("tspan").remove();
+  });
 });
 
 },{"d3":32}]},{},[33]);

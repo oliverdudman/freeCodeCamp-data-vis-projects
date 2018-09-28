@@ -14,6 +14,10 @@ chart.append("text")
   .attr("id", "title")
   .text("United States GDP");
 
+chart.append("text")
+  .attr("id", "tooltip")
+  .style("opacity", "0");
+
 d3.json("./data/GDP-data.json")
   .then(function(json) {
     console.log(json);
@@ -50,5 +54,29 @@ d3.json("./data/GDP-data.json")
          .attr("data-date", d => d[0])
          .attr("data-gdp", d => d[1])
          .attr("width", 2)
-         .style("fill", "blue");
+         .style("fill", "blue")
+         .on("mouseover", d => {
+           let positionX = xScale(new Date(d[0]));
+           let tooltip = chart.select("#tooltip")
+           .attr("x", positionX)
+           .attr("y", yScale(d[1]) / 2)
+           .attr("data-date", d[0])
+           .style("transition", "1s")
+           .style("opacity", "1");
+
+           tooltip.append("tspan")
+                  .attr("x", positionX)
+                  .text(`GDP: ${d[1]}`);
+
+           tooltip.append("tspan")
+                  .attr("dy", "1em")
+                  .attr("x", positionX)
+                  .text(`Date: ${d[0]}`);
+         })
+         .on("mouseleave", () => {
+           chart.select("#tooltip")
+                .style("opacity", "0")
+                .selectAll("tspan")
+                .remove();
+         });
   });
