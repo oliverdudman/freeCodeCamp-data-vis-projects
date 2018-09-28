@@ -18401,6 +18401,10 @@ d3.json("./data/GDP-data.json").then(function (json) {
     return xScale(new Date(d[0]));
   }).attr("height", function (d) {
     return h - padding - yScale(d[1]);
+  }).attr("data-date", function (d) {
+    return d[0];
+  }).attr("data-gdp", function (d) {
+    return d[1];
   }).attr("width", 2).style("fill", "blue");
 });
 
