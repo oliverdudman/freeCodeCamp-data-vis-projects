@@ -5,10 +5,12 @@ svg {
 #tooltip {
   position: absolute;
 
+  width: 150px;
   padding: 1rem;
   border-radius: 1rem;
   opacity: 0;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  box-sizing: border-box;
 
   background-color: rgba(0,0,0,0.5);
   color: orange;

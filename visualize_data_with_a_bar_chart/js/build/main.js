@@ -18406,9 +18406,19 @@ d3.json("./data/GDP-data.json").then(function (json) {
     return d[0];
   }).attr("data-gdp", function (d) {
     return d[1];
-  }).attr("width", 2).style("fill", "blue").on("mouseover", function (d) {
+  }).attr("width", 2).style("fill", "blue").on("mousemove", function (d) {
     console.log(d3.event);
-    tooltip.attr("data-date", d[0]).style("opacity", "1").style("top", d3.event.clientY + "px").style("left", d3.event.clientX + "px").html("GDP: ".concat(d[1], "<br/> Date: ").concat(d[0]));
+    console.log(parseInt(tooltip.style("width")));
+    console.log(window.innerWidth);
+    console.log(d3.event.clientX + tooltip.style("width"));
+    var x = d3.event.clientX;
+
+    if (x + parseInt(tooltip.style("width")) >= parseInt(chart.style("width"))) {
+      x = parseInt(chart.style("width")) - parseInt(tooltip.style("width"));
+    }
+
+    console.log(x);
+    tooltip.attr("data-date", d[0]).style("opacity", "1").style("top", d3.event.clientY - (parseInt(tooltip.style("height")) + 15) + "px").style("left", x + "px").html("GDP: ".concat(d[1], "<br/> Date: ").concat(d[0]));
   }).on("mouseleave", function () {
     tooltip.style("opacity", "0");
   });
