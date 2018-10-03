@@ -8,15 +8,13 @@ var chart = d3.select("#chart")
   .attr("width", w)
   .attr("height", h);
 
+var tooltip = d3.select("#tooltip");
+
 chart.append("text")
   .attr("y", 150)
   .attr("x", 200)
   .attr("id", "title")
   .text("United States GDP");
-
-chart.append("text")
-  .attr("id", "tooltip")
-  .style("opacity", "0");
 
 d3.json("./data/GDP-data.json")
   .then(function(json) {
@@ -56,27 +54,16 @@ d3.json("./data/GDP-data.json")
          .attr("width", 2)
          .style("fill", "blue")
          .on("mouseover", d => {
-           let positionX = xScale(new Date(d[0]));
-           let tooltip = chart.select("#tooltip")
-           .attr("x", positionX)
-           .attr("y", yScale(d[1]) / 2)
-           .attr("data-date", d[0])
-           .style("transition", "1s")
-           .style("opacity", "1");
+           console.log(d3.event);
+           tooltip.attr("data-date", d[0])
+                  .style("opacity", "1")
+                  .style("top", d3.event.clientY + "px")
+                  .style("left", d3.event.clientX + "px")
+                  .html(`GDP: ${d[1]}<br/> Date: ${d[0]}`);
 
-           tooltip.append("tspan")
-                  .attr("x", positionX)
-                  .text(`GDP: ${d[1]}`);
 
-           tooltip.append("tspan")
-                  .attr("dy", "1em")
-                  .attr("x", positionX)
-                  .text(`Date: ${d[0]}`);
          })
          .on("mouseleave", () => {
-           chart.select("#tooltip")
-                .style("opacity", "0")
-                .selectAll("tspan")
-                .remove();
+           tooltip.style("opacity", "0");
          });
   });

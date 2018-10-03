@@ -18380,8 +18380,8 @@ var w = 700;
 var h = 500;
 var padding = 50;
 var chart = d3.select("#chart").attr("width", w).attr("height", h);
+var tooltip = d3.select("#tooltip");
 chart.append("text").attr("y", 150).attr("x", 200).attr("id", "title").text("United States GDP");
-chart.append("text").attr("id", "tooltip").style("opacity", "0");
 d3.json("./data/GDP-data.json").then(function (json) {
   console.log(json);
   var xScale = d3.scaleTime().domain([d3.min(json.data, function (d) {
@@ -18407,12 +18407,10 @@ d3.json("./data/GDP-data.json").then(function (json) {
   }).attr("data-gdp", function (d) {
     return d[1];
   }).attr("width", 2).style("fill", "blue").on("mouseover", function (d) {
-    var positionX = xScale(new Date(d[0]));
-    var tooltip = chart.select("#tooltip").attr("x", positionX).attr("y", yScale(d[1]) / 2).attr("data-date", d[0]).style("transition", "1s").style("opacity", "1");
-    tooltip.append("tspan").attr("x", positionX).text("GDP: ".concat(d[1]));
-    tooltip.append("tspan").attr("dy", "1em").attr("x", positionX).text("Date: ".concat(d[0]));
+    console.log(d3.event);
+    tooltip.attr("data-date", d[0]).style("opacity", "1").style("top", d3.event.clientY + "px").style("left", d3.event.clientX + "px").html("GDP: ".concat(d[1], "<br/> Date: ").concat(d[0]));
   }).on("mouseleave", function () {
-    chart.select("#tooltip").style("opacity", "0").selectAll("tspan").remove();
+    tooltip.style("opacity", "0");
   });
 });
 
