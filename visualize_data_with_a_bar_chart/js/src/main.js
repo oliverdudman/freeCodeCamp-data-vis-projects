@@ -54,15 +54,12 @@ d3.json("./data/GDP-data.json")
          .attr("width", 2)
          .style("fill", "blue")
          .on("mousemove", d => {
-           console.log(d3.event);
-           console.log(parseInt(tooltip.style("width")));
-           console.log(window.innerWidth);
-           console.log(d3.event.clientX + tooltip.style("width"));
+           let tooltipW = parseInt(tooltip.style("width"));
+           let chartW = parseInt(chart.style("width"));
            let x = d3.event.clientX;
-           if (x + parseInt(tooltip.style("width")) >= parseInt(chart.style("width"))) {
-             x = parseInt(chart.style("width")) - parseInt(tooltip.style("width"));
+           if (x + tooltipW >= chartW) {
+             x = chartW - tooltipW;
            }
-           console.log(x);
            tooltip.attr("data-date", d[0])
                   .style("opacity", "1")
                   .style("top", d3.event.clientY - (parseInt(tooltip.style("height")) + 15) + "px")
