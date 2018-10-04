@@ -18408,11 +18408,11 @@ d3.json("./data/GDP-data.json").then(function (json) {
     return d[1];
   }).attr("width", 3).on("mousemove", function (d) {
     var tooltipW = parseInt(tooltip.style("width"));
-    var chartW = parseInt(chart.style("width"));
+    var chartX2 = document.getElementById("chart").getBoundingClientRect().right;
     var x = d3.event.clientX;
 
-    if (x + tooltipW >= chartW) {
-      x = chartW - tooltipW;
+    if (x + tooltipW >= chartX2) {
+      x = chartX2 - tooltipW;
     }
 
     tooltip.attr("data-date", d[0]).style("opacity", "1").style("top", d3.event.clientY - (parseInt(tooltip.style("height")) + 15) + "px").style("left", x + "px").html("GDP: ".concat(d[1], "<br/> Date: ").concat(d[0]));

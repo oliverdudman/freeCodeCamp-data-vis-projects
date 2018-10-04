@@ -54,10 +54,10 @@ d3.json("./data/GDP-data.json")
          .attr("width", 3)
          .on("mousemove", d => {
            let tooltipW = parseInt(tooltip.style("width"));
-           let chartW = parseInt(chart.style("width"));
+           let chartX2 = document.getElementById("chart").getBoundingClientRect().right;
            let x = d3.event.clientX;
-           if (x + tooltipW >= chartW) {
-             x = chartW - tooltipW;
+           if (x + tooltipW >= chartX2) {
+             x = chartX2 - tooltipW;
            }
            tooltip.attr("data-date", d[0])
                   .style("opacity", "1")
