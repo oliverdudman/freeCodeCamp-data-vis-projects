@@ -18406,7 +18406,7 @@ d3.json("./data/GDP-data.json").then(function (json) {
     return d[0];
   }).attr("data-gdp", function (d) {
     return d[1];
-  }).attr("width", 2).style("fill", "blue").on("mousemove", function (d) {
+  }).attr("width", 3).on("mousemove", function (d) {
     var tooltipW = parseInt(tooltip.style("width"));
     var chartW = parseInt(chart.style("width"));
     var x = d3.event.clientX;

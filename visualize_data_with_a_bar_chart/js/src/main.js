@@ -51,8 +51,7 @@ d3.json("./data/GDP-data.json")
          .attr("height", d => h - padding - yScale(d[1]))
          .attr("data-date", d => d[0])
          .attr("data-gdp", d => d[1])
-         .attr("width", 2)
-         .style("fill", "blue")
+         .attr("width", 3)
          .on("mousemove", d => {
            let tooltipW = parseInt(tooltip.style("width"));
            let chartW = parseInt(chart.style("width"));
