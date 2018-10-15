@@ -18384,7 +18384,6 @@ var chart = d3.select("#chart").attr("width", w).attr("height", h);
 var tooltip = d3.select("#tooltip");
 chart.append("text").attr("y", 50).attr("x", 250).attr("id", "title").text("United States GDP");
 d3.json("./data/GDP-data.json").then(function (json) {
-  console.log(json);
   var xScale = d3.scaleTime().domain([d3.min(json.data, function (d) {
     return new Date(d[0]);
   }), d3.max(json.data, function (d) {

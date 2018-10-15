@@ -19,8 +19,6 @@ chart.append("text")
 
 d3.json("./data/GDP-data.json")
   .then(function(json) {
-    console.log(json);
-
     const xScale = d3.scaleTime()
                      .domain([d3.min(json.data, d => new Date(d[0])),
                               d3.max(json.data, d => new Date(d[0]))])
