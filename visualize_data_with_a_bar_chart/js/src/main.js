@@ -3,19 +3,12 @@ const d3 = require("d3");
 const w = 700;
 const h = 500;
 const padding = 50;
-const headingSpace = 50;
 
 var chart = d3.select("#chart")
   .attr("width", w)
   .attr("height", h);
 
 var tooltip = d3.select("#tooltip");
-
-chart.append("text")
-  .attr("y", 50)
-  .attr("x", 250)
-  .attr("id", "title")
-  .text("United States GDP");
 
 d3.json("./data/GDP-data.json")
   .then(function(json) {
@@ -25,7 +18,7 @@ d3.json("./data/GDP-data.json")
                      .range([0 + padding, w - padding]);
     const yScale = d3.scaleLinear()
                      .domain([0, d3.max(json.data, d => d[1])])
-                     .range([h - padding, 0 + padding + headingSpace]);
+                     .range([h - padding, 0 + padding]);
 
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);

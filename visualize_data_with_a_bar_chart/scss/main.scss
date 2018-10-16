@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+$main-font: "Roboto", sans-serif;
+
 html, body {
   display: flex;
   justify-content: center;
@@ -11,12 +15,14 @@ html, body {
 }
 
 #chart {
-  border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
-
-  background-color: #5F97D9;
-
   font-size: 2rem;
+}
+
+#title {
+  margin: 0;
+
+  text-align: center;
+  font-family: $main-font;
 }
 
 #tooltip {
@@ -42,4 +48,12 @@ html, body {
   &:hover {
     fill: #BBA400;
   }
+}
+
+.chart-container {
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+
+  background-color: #5F97D9;
 }
