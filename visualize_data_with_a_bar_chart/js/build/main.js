@@ -18414,7 +18414,9 @@ d3.json("./data/GDP-data.json").then(function (json) {
       x = chartX2 - tooltipW;
     }
 
-    tooltip.attr("data-date", d[0]).style("opacity", "1").style("top", d3.event.clientY - (parseInt(tooltip.style("height")) + 15) + "px").style("left", x + "px").html("GDP: $".concat(d[1], " Billion<br/> Date: ").concat(d[0]));
+    var date = new Date(d[0]);
+    var dateDisplay = date.getFullYear() + " Q" + Math.ceil((date.getMonth() + 1) / 3);
+    tooltip.attr("data-date", d[0]).style("opacity", "1").style("top", d3.event.clientY - (parseInt(tooltip.style("height")) + 15) + "px").style("left", x + "px").html("GDP: $".concat(d[1].toFixed(1), " Billion<br/> Date: ").concat(dateDisplay));
   }).on("mouseleave", function () {
     tooltip.style("opacity", "0");
   });

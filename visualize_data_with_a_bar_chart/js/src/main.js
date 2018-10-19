@@ -52,11 +52,13 @@ d3.json("./data/GDP-data.json")
            if (x + tooltipW >= chartX2) {
              x = chartX2 - tooltipW;
            }
+           let date = new Date(d[0]);
+           let dateDisplay = date.getFullYear() + " Q" + Math.ceil((date.getMonth() + 1) / 3);
            tooltip.attr("data-date", d[0])
                   .style("opacity", "1")
                   .style("top", d3.event.clientY - (parseInt(tooltip.style("height")) + 15) + "px")
                   .style("left", x + "px")
-                  .html(`GDP: $${d[1]} Billion<br/> Date: ${d[0]}`);
+                  .html(`GDP: $${d[1].toFixed(1)} Billion<br/> Date: ${dateDisplay}`);
 
 
          })
