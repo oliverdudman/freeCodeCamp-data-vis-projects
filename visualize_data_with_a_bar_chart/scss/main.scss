@@ -21,6 +21,8 @@ html, body {
 #title {
   margin: 0;
 
+  color: #1F106F;
+
   text-align: center;
   font-family: $main-font;
 }
@@ -53,7 +55,7 @@ html, body {
 .chart-container {
   padding: 2em;
   border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+  box-shadow: 5px 5px 25px 10px rgba(0,0,0,0.3);
 
   background-color: #5F97D9;
 }

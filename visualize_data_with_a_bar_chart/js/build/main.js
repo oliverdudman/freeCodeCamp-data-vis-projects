@@ -18379,6 +18379,7 @@ var d3 = require("d3");
 var w = 700;
 var h = 500;
 var padding = 50;
+var yAxisPadding = 25;
 var chart = d3.select("#chart").attr("width", w).attr("height", h);
 var tooltip = d3.select("#tooltip");
 d3.json("./data/GDP-data.json").then(function (json) {
@@ -18386,14 +18387,14 @@ d3.json("./data/GDP-data.json").then(function (json) {
     return new Date(d[0]);
   }), d3.max(json.data, function (d) {
     return new Date(d[0]);
-  })]).range([0 + padding, w - padding]);
+  })]).range([0 + padding + yAxisPadding, w - padding]);
   var yScale = d3.scaleLinear().domain([0, d3.max(json.data, function (d) {
     return d[1];
   })]).range([h - padding, 0 + padding]);
   var xAxis = d3.axisBottom(xScale);
   var yAxis = d3.axisLeft(yScale);
   chart.append("g").attr("id", "x-axis").attr("transform", "translate(0, " + (h - padding) + ")").call(xAxis);
-  chart.append("g").attr("id", "y-axis").attr("transform", "translate(" + padding + ", 0)").call(yAxis);
+  chart.append("g").attr("id", "y-axis").attr("transform", "translate(" + (padding + yAxisPadding) + ", 0)").call(yAxis);
   chart.selectAll("rect").data(json.data).enter().append("rect").attr("class", "bar").attr("y", function (d) {
     return yScale(d[1]);
   }).attr("x", function (d) {
@@ -18404,7 +18405,7 @@ d3.json("./data/GDP-data.json").then(function (json) {
     return d[0];
   }).attr("data-gdp", function (d) {
     return d[1];
-  }).attr("width", 3).on("mousemove", function (d) {
+  }).attr("width", w / json.data.length).on("mousemove", function (d) {
     var tooltipW = parseInt(tooltip.style("width"));
     var chartX2 = document.getElementById("chart").getBoundingClientRect().right;
     var x = d3.event.clientX;

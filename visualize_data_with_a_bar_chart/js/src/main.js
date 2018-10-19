@@ -3,6 +3,7 @@ const d3 = require("d3");
 const w = 700;
 const h = 500;
 const padding = 50;
+const yAxisPadding = 25;
 
 var chart = d3.select("#chart")
   .attr("width", w)
@@ -15,7 +16,7 @@ d3.json("./data/GDP-data.json")
     const xScale = d3.scaleTime()
                      .domain([d3.min(json.data, d => new Date(d[0])),
                               d3.max(json.data, d => new Date(d[0]))])
-                     .range([0 + padding, w - padding]);
+                     .range([0 + padding + yAxisPadding, w - padding]);
     const yScale = d3.scaleLinear()
                      .domain([0, d3.max(json.data, d => d[1])])
                      .range([h - padding, 0 + padding]);
@@ -30,7 +31,7 @@ d3.json("./data/GDP-data.json")
 
     chart.append("g")
          .attr("id", "y-axis")
-         .attr("transform", "translate(" + padding  + ", 0)")
+         .attr("transform", "translate(" + (padding + yAxisPadding) + ", 0)")
          .call(yAxis);
 
     chart.selectAll("rect")
@@ -43,7 +44,7 @@ d3.json("./data/GDP-data.json")
          .attr("height", d => h - padding - yScale(d[1]))
          .attr("data-date", d => d[0])
          .attr("data-gdp", d => d[1])
-         .attr("width", 3)
+         .attr("width", w / json.data.length)
          .on("mousemove", d => {
            let tooltipW = parseInt(tooltip.style("width"));
            let chartX2 = document.getElementById("chart").getBoundingClientRect().right;
