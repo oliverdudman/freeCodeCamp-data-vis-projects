@@ -18387,12 +18387,12 @@ d3.json("./data/GDP-data.json").then(function (json) {
     return new Date(d[0]);
   }), d3.max(json.data, function (d) {
     return new Date(d[0]);
-  })]).range([0 + padding + yAxisPadding, w - padding]);
+  })]).range([0 + padding + yAxisPadding, w - padding]).nice(d3.timeYear, 1);
   var yScale = d3.scaleLinear().domain([0, d3.max(json.data, function (d) {
     return d[1];
   })]).range([h - padding, 0 + padding]);
-  var xAxis = d3.axisBottom(xScale);
-  var yAxis = d3.axisLeft(yScale);
+  var xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
+  var yAxis = d3.axisLeft(yScale).tickSizeOuter(0);
   chart.append("g").attr("id", "x-axis").attr("transform", "translate(0, " + (h - padding) + ")").call(xAxis);
   chart.append("g").attr("id", "y-axis").attr("transform", "translate(" + (padding + yAxisPadding) + ", 0)").call(yAxis);
   chart.selectAll("rect").data(json.data).enter().append("rect").attr("class", "bar").attr("y", function (d) {
@@ -18405,7 +18405,7 @@ d3.json("./data/GDP-data.json").then(function (json) {
     return d[0];
   }).attr("data-gdp", function (d) {
     return d[1];
-  }).attr("width", w / json.data.length).on("mousemove", function (d) {
+  }).attr("width", 2).on("mousemove", function (d) {
     var tooltipW = parseInt(tooltip.style("width"));
     var chartX2 = document.getElementById("chart").getBoundingClientRect().right;
     var x = d3.event.clientX;

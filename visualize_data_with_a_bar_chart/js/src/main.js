@@ -16,13 +16,13 @@ d3.json("./data/GDP-data.json")
     const xScale = d3.scaleTime()
                      .domain([d3.min(json.data, d => new Date(d[0])),
                               d3.max(json.data, d => new Date(d[0]))])
-                     .range([0 + padding + yAxisPadding, w - padding]);
+                     .range([0 + padding + yAxisPadding, w - padding]).nice(d3.timeYear, 1);
     const yScale = d3.scaleLinear()
                      .domain([0, d3.max(json.data, d => d[1])])
                      .range([h - padding, 0 + padding]);
 
-    const xAxis = d3.axisBottom(xScale);
-    const yAxis = d3.axisLeft(yScale);
+    const xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
+    const yAxis = d3.axisLeft(yScale).tickSizeOuter(0);
 
     chart.append("g")
          .attr("id", "x-axis")
@@ -44,7 +44,7 @@ d3.json("./data/GDP-data.json")
          .attr("height", d => h - padding - yScale(d[1]))
          .attr("data-date", d => d[0])
          .attr("data-gdp", d => d[1])
-         .attr("width", w / json.data.length)
+         .attr("width", 2)
          .on("mousemove", d => {
            let tooltipW = parseInt(tooltip.style("width"));
            let chartX2 = document.getElementById("chart").getBoundingClientRect().right;
