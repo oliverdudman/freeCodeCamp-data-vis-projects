@@ -15,7 +15,7 @@ html, body {
 }
 
 #chart {
-  font-size: 2rem;
+  font-size: 20px;
 }
 
 #title {
@@ -30,7 +30,7 @@ html, body {
 #tooltip {
   position: absolute;
 
-  width: 150px;
+  width: 200px;
   padding: 1rem;
   border-radius: 1rem;
   opacity: 0;
@@ -38,7 +38,10 @@ html, body {
   box-sizing: border-box;
 
   background-color: rgba(0,0,0,0.5);
-  color: orange;
+  color: #D2CE0A;
+
+  font-family: $main-font;
+  text-align: center;
 
   transition: 0.4s opacity;
   pointer-events: none;
@@ -58,4 +61,9 @@ html, body {
   box-shadow: 5px 5px 25px 10px rgba(0,0,0,0.3);
 
   background-color: #5F97D9;
+}
+
+.tick {
+  font-size: 0.8rem;
+  font-family: $main-font;
 }

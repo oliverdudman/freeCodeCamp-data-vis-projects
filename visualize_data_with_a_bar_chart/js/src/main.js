@@ -56,7 +56,7 @@ d3.json("./data/GDP-data.json")
                   .style("opacity", "1")
                   .style("top", d3.event.clientY - (parseInt(tooltip.style("height")) + 15) + "px")
                   .style("left", x + "px")
-                  .html(`GDP: ${d[1]}<br/> Date: ${d[0]}`);
+                  .html(`GDP: $${d[1]} Billion<br/> Date: ${d[0]}`);
 
 
          })
