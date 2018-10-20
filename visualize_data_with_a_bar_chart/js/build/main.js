@@ -18395,6 +18395,8 @@ d3.json("./data/GDP-data.json").then(function (json) {
   var yAxis = d3.axisLeft(yScale).tickSizeOuter(0);
   chart.append("g").attr("id", "x-axis").attr("transform", "translate(0, " + (h - padding) + ")").call(xAxis);
   chart.append("g").attr("id", "y-axis").attr("transform", "translate(" + (padding + yAxisPadding) + ", 0)").call(yAxis);
+  chart.append("text").attr("x", w / 2).attr("y", h).text("Year").style("text-anchor", "middle");
+  chart.append("text").text("GDP (Billons of Dollars)").attr("transform", "translate(".concat(yAxisPadding / 1.5, ", ").concat(h / 2, ")rotate(-90)")).style("text-anchor", "middle");
   chart.selectAll("rect").data(json.data).enter().append("rect").attr("class", "bar").attr("y", function (d) {
     return yScale(d[1]);
   }).attr("x", function (d) {

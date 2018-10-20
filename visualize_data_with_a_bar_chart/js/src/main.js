@@ -34,6 +34,17 @@ d3.json("./data/GDP-data.json")
          .attr("transform", "translate(" + (padding + yAxisPadding) + ", 0)")
          .call(yAxis);
 
+    chart.append("text")
+         .attr("x", w/2)
+         .attr("y", h)
+         .text("Year")
+         .style("text-anchor", "middle");
+
+    chart.append("text")
+         .text("GDP (Billons of Dollars)")
+         .attr("transform", `translate(${yAxisPadding/1.5}, ${h/2})rotate(-90)`)
+         .style("text-anchor", "middle");
+
     chart.selectAll("rect")
          .data(json.data)
          .enter()
