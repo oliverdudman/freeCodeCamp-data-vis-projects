@@ -11,7 +11,8 @@ const source = require("vinyl-source-stream");
 const sourcemaps = require("gulp-sourcemaps");
 
 const paths = {
-  "bar": "visualize_data_with_a_bar_chart"
+  "bar": "visualize_data_with_a_bar_chart",
+  "scatter": "visualize_data_with_a_scatterplot_graph"
 };
 
 // development tools
