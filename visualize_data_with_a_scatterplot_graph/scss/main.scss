@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+$main-font: "Roboto", sans-serif;
+
+html, body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+
+  background-color: #6DB89E;
+}
+
+#chart {
+  font-size: 1.1rem;
+  font-family: $main-font;
+}
+
+#title {
+  margin: 0;
+
+  color: #1F106F;
+
+  text-align: center;
+  font-family: $main-font;
+}
+
+#tooltip {
+  position: absolute;
+
+  width: 200px;
+  padding: 1rem;
+  border-radius: 1rem;
+  opacity: 0;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  box-sizing: border-box;
+
+  background-color: rgba(0,0,0,0.5);
+  color: #D2CE0A;
+
+  font-family: $main-font;
+  text-align: center;
+
+  transition: 0.4s opacity;
+  pointer-events: none;
+}
+
+.bar {
+  fill: #1F106F;
+
+  &:hover {
+    fill: #BBA400;
+  }
+}
+
+.chart-container {
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 5px 5px 25px 10px rgba(0,0,0,0.3);
+
+  background-color: #5F97D9;
+}
+
+.source {
+  font-size: 0.75rem;
+}
+
+.tick {
+  font-size: 0.8rem;
+  font-family: $main-font;
+}
