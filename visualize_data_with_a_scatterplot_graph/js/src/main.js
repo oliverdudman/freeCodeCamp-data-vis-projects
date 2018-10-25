@@ -34,4 +34,13 @@ d3.json("./data/cyclist-data.json")
          .attr("id", "y-axis")
          .attr("transform", `translate(${padding + yAxisPadding}, 0)`)
          .call(yAxis);
+
+    chart.selectAll("circle")
+         .data(json)
+         .enter()
+         .append("circle")
+         .attr("cx", d => xScale(new Date(d.Year, 0)))
+         .attr("cy", d => yScale(d.Seconds))
+         .attr("r", 5)
+         .style("fill", "green");
   });

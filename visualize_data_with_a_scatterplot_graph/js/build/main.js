@@ -18399,6 +18399,11 @@ d3.json("./data/cyclist-data.json").then(function (json) {
   });
   chart.append("g").attr("id", "x-axis").attr("transform", "translate(0, ".concat(h - padding, ")")).call(xAxis);
   chart.append("g").attr("id", "y-axis").attr("transform", "translate(".concat(padding + yAxisPadding, ", 0)")).call(yAxis);
+  chart.selectAll("circle").data(json).enter().append("circle").attr("cx", function (d) {
+    return xScale(new Date(d.Year, 0));
+  }).attr("cy", function (d) {
+    return yScale(d.Seconds);
+  }).attr("r", 5).style("fill", "green");
 });
 
 },{"d3":32}]},{},[33]);
