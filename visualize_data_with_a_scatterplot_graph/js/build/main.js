@@ -18403,7 +18403,11 @@ d3.json("./data/cyclist-data.json").then(function (json) {
     return xScale(new Date(d.Year, 0));
   }).attr("cy", function (d) {
     return yScale(d.Seconds);
-  }).attr("r", 5).style("fill", "green");
+  }).attr("r", 5).attr("class", "dot").attr("data-xvalue", function (d) {
+    return d.Year;
+  }).attr("data-yvalue", function (d) {
+    return new Date(d.Seconds * 1000);
+  }).style("fill", "green");
 });
 
 },{"d3":32}]},{},[33]);

@@ -42,5 +42,8 @@ d3.json("./data/cyclist-data.json")
          .attr("cx", d => xScale(new Date(d.Year, 0)))
          .attr("cy", d => yScale(d.Seconds))
          .attr("r", 5)
+         .attr("class", "dot")
+         .attr("data-xvalue", d => d.Year)
+         .attr("data-yvalue", d => new Date(d.Seconds*1000))
          .style("fill", "green");
   });
