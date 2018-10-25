@@ -34,6 +34,4 @@ d3.json("./data/cyclist-data.json")
          .attr("id", "y-axis")
          .attr("transform", `translate(${padding + yAxisPadding}, 0)`)
          .call(yAxis);
-
-         console.log(d3.timeYear(1555));
   });
